@@ -1,6 +1,7 @@
 package com.ryan.simplechatview.demo;
 
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -43,8 +44,13 @@ public class GiftNewsHolder extends BaseChatViewHolder {
         builder.setSpan(imageSpan, leftLen, leftLen + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         int totalLen = builder.length();
+        // 设置送礼信息颜色
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#368CFD"));
         builder.setSpan(colorSpan, data.sendUserName.length() + strTo.length(), totalLen, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        //设置用户名颜色
+        colorSpan = new ForegroundColorSpan(ContextCompat.getColor(AppUtils.getContext(), R.color.color_chat_username));
+        builder.setSpan(colorSpan, 0, data.sendUserName.length() + 1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         tips.setText(builder);
     }
 

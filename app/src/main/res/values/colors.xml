@@ -12,4 +12,7 @@
 
     <color name="color_title_text">#25252f</color>
 
+    <color name="color_chat_username">#cacaca</color>
+    <color name="color_chat_at_username">#80D640</color>
+
 </resources>
