@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_bottom_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp10"
@@ -18,8 +19,8 @@
         android:background="@drawable/bg_input"
         android:gravity="center"
         android:text="@string/say_something"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp14" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp12" />
 
     <ImageView
         android:id="@+id/btn_recode"

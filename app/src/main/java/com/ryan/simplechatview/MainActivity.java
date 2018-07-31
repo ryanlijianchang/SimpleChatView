@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         mChatView = findViewById(R.id.chat);
 
-        mAdapter = new SimpleChatAdapter(TestUtils.getChatList());
+        mAdapter = new SimpleChatAdapter(null);
         mChatView.setAdapter(mAdapter);
-        mChatView.runToBottom();
     }
 }

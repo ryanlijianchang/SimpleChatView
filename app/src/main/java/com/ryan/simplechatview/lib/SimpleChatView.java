@@ -44,6 +44,7 @@ public class SimpleChatView extends RecyclerView {
         // 设置LayoutManager
         mLinearManager = new LinearLayoutManager(AppUtils.getContext());
         setLayoutManager(mLinearManager);
+        setOverScrollMode(OVER_SCROLL_NEVER);
     }
 
 
