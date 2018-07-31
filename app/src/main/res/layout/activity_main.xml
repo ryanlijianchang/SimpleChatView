@@ -23,7 +23,9 @@
         android:layout_height="300dp"
         android:layout_marginBottom="45dp"
         android:layout_marginEnd="100dp"
+        android:layout_marginLeft="@dimen/dp5"
         android:layout_marginRight="100dp"
+        android:layout_marginStart="@dimen/dp5"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

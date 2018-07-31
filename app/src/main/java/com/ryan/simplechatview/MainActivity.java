@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.DensityUtils;
-import com.ryan.simplechatview.demo.ChatDecoration;
+import com.ryan.simplechatview.lib.ChatDecoration;
 import com.ryan.simplechatview.demo.SimpleChatAdapter;
 import com.ryan.simplechatview.lib.SimpleChatView;
 import com.ryan.simplechatview.test.TestUtils;
@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mChatView = findViewById(R.id.chat);
+
         mAdapter = new SimpleChatAdapter(TestUtils.getChatList());
-        mChatView.addItemDecoration(new ChatDecoration(DensityUtils.dp2px(AppUtils.getContext(), 3)));
-        mChatView.setLayoutManager(new LinearLayoutManager(this));
         mChatView.setAdapter(mAdapter);
+        mChatView.runToBottom();
     }
 }

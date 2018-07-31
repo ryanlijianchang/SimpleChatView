@@ -23,8 +23,10 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
     @Override
     public BaseChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
+            case TYPE_HEADER:
+                return new HeaderChatHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_header_text, parent, false));
             case MyChatMsg.TYPE_NORMAL_TEXT:
-                return new TextChatHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_normal_text, parent, false));
+                return new NormalChatHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_normal_text, parent, false));
             default:
                 return null;
         }
@@ -32,16 +34,19 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
 
     @Override
     public void onBindViewHolder(BaseChatViewHolder holder, int position) {
-        MyChatMsg msg = mDatas.get(position);
-        if (holder == null || msg == null) {
+        if (getItemViewType(position) == TYPE_HEADER) {
+            holder.bindData(null, position);
             return;
         }
-        holder.bindData(msg, position);
+        holder.bindData(mDatas.get(position - 1), position);
     }
 
     @Override
     public int getItemViewType(int position) {
-        MyChatMsg msg = mDatas.get(position);
+        if (position == 0) {
+            return TYPE_HEADER;
+        }
+        MyChatMsg msg = mDatas.get(position - 1);
         if (msg == null) {
             return MyChatMsg.TYPE_NORMAL_TEXT;
         }
@@ -50,6 +55,6 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
 
     @Override
     public int getItemCount() {
-        return ListUtils.isEmpty(mDatas) ? 0 : mDatas.size();
+        return ListUtils.isEmpty(mDatas) ? 1 : mDatas.size() + 1;
     }
 }

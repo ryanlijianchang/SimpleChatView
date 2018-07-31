@@ -7,9 +7,9 @@ import com.ryan.simplechatview.R;
 import com.ryan.simplechatview.lib.BaseChatMsg;
 import com.ryan.simplechatview.lib.BaseChatViewHolder;
 
-public class TextChatHolder extends BaseChatViewHolder {
+public class NormalChatHolder extends BaseChatViewHolder {
 
-    public TextChatHolder(View itemView) {
+    public NormalChatHolder(View itemView) {
         super(itemView);
     }
 
