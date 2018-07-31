@@ -4,12 +4,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tv_normal_text_msg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_normal_text"
+        android:id="@+id/tv_system_news_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:lineSpacingExtra="@dimen/dp3"
         android:textSize="@dimen/sp14"
-        android:textColor="@color/white" />
+        android:textColor="#deab06" />
 
 </android.support.constraint.ConstraintLayout>

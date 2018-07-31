@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SimpleChatView</string>
+
+    <string name="str_to">：</string>
+    <string name="str_at">\@</string>
+    <string name="str_send_to">我给主播赠送了</string>
+
 </resources>

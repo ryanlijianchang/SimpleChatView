@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="@dimen/dp3"
+        android:textSize="@dimen/sp14"
         android:textColor="#2fd70d" />
 
 </android.support.constraint.ConstraintLayout>
