@@ -36,7 +36,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/username"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp14" />
+                android:textSize="@dimen/sp12" />
 
             <TextView
                 android:id="@+id/tv_broadcast_info_viewers"
@@ -46,7 +46,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/viewers_num"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp12" />
+                android:textSize="@dimen/sp10" />
 
         </LinearLayout>
 
