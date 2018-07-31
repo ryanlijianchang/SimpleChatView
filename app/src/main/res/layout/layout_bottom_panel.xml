@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp10"
+    android:paddingEnd="@dimen/dp5"
+    android:paddingLeft="@dimen/dp10"
+    android:paddingRight="@dimen/dp5"
+    android:paddingStart="@dimen/dp10"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent">
+
+    <TextView
+        android:id="@+id/tv_input"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_input"
+        android:gravity="center"
+        android:text="@string/say_something"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp14" />
+
+    <ImageView
+        android:id="@+id/btn_recode"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_recode"
+        app:layout_constraintLeft_toRightOf="@id/tv_input" />
+
+
+    <ImageView
+        android:id="@+id/btn_shake"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_shake"
+        app:layout_constraintLeft_toRightOf="@id/btn_recode" />
+
+    <ImageView
+        android:id="@+id/btn_match"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_match"
+        app:layout_constraintLeft_toRightOf="@id/btn_shake" />
+
+    <ImageView
+        android:id="@+id/btn_share"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintLeft_toRightOf="@id/btn_match" />
+
+    <ImageView
+        android:id="@+id/btn_cut"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_cut"
+        app:layout_constraintLeft_toRightOf="@id/btn_share" />
+
+    <ImageView
+        android:id="@+id/btn_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/bg_bottom_function"
+        android:padding="5dp"
+        android:src="@drawable/ic_more"
+        app:layout_constraintLeft_toRightOf="@id/btn_cut" />
+
+
+    <ImageView
+        android:id="@+id/btn_gift"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ic_gift"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#585858"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_live" />
+
+    <include layout="@layout/layout_broadcast_info" />
+
+    <include layout="@layout/layout_bottom_panel" />
+
+    <com.ryan.simplechatview.lib.SimpleChatView
+        android:id="@+id/chat"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

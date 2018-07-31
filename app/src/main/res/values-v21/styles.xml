@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppCompatActivityTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:colorPrimaryDark">@color/color_title_text</item>
+    </style>
+
+</resources>

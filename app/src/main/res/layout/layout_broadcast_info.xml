@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_broadcast_info_left"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/bg_broadcast_info"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <com.ryan.simplechatview.CircleImageView
+            android:id="@+id/iv_broadcast_info_header"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_head" />
+
+        <LinearLayout
+            android:id="@+id/ll_broadcast_info_base"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/iv_broadcast_info_header"
+            android:layout_toRightOf="@id/iv_broadcast_info_header"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_broadcast_info_username"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/username"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp14" />
+
+            <TextView
+                android:id="@+id/tv_broadcast_info_viewers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/viewers_num"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp12" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/ll_broadcast_info_base"
+            android:layout_toRightOf="@id/ll_broadcast_info_base"
+            android:background="@drawable/ic_follow" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toRightOf="@id/rl_broadcast_info_left">
+
+        <com.ryan.simplechatview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_viewer_1" />
+
+        <com.ryan.simplechatview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_viewer_2" />
+
+        <com.ryan.simplechatview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_viewer_3" />
+
+        <com.ryan.simplechatview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_viewer_4" />
+
+        <com.ryan.simplechatview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_viewer_5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/bg_viewers_num"
+            android:gravity="center"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/viewers"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp13" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
