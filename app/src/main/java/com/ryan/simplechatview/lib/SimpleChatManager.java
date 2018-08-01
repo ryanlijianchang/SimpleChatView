@@ -2,13 +2,15 @@ package com.ryan.simplechatview.lib;
 
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ryan.baselib.util.AppUtils;
@@ -45,6 +47,30 @@ public class SimpleChatManager implements ISimpleChat {
         this.mChatView = mRecyclerView;
 
         initChatView();
+        addScrollListener();
+    }
+
+    private void addScrollListener() {
+        mChatView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int lastVisibleIndex = getLastVisibleIndex();
+                    int itemSize = getItemSize();
+                    if (lastVisibleIndex == itemSize - 1) {
+                        hideNewsView();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     private void initChatView() {
@@ -108,12 +134,43 @@ public class SimpleChatManager implements ISimpleChat {
                 newsView.setCompoundDrawablePadding(5);
             }
             newsView.setBackgroundResource(R.drawable.bg_chat_news);
-            parent.addView(newsView);
+            int chatIndex = parent.getChildCount();
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                if (parent.getChildAt(i).equals(mChatView)) {
+                    chatIndex = i;
+                }
+            }
+            parent.addView(newsView, chatIndex + 1);
 
-            ConstraintLayout.LayoutParams newsViewLps = (ConstraintLayout.LayoutParams) newsView.getLayoutParams();
-            newsViewLps.bottomToBottom = mChatView.getId();
+            ViewGroup.LayoutParams layoutParams = newsView.getLayoutParams();
+            if (layoutParams instanceof ConstraintLayout.LayoutParams) {
+                ConstraintLayout.LayoutParams newsViewLps = (ConstraintLayout.LayoutParams) layoutParams;
+                newsViewLps.bottomToBottom = mChatView.getId();
+                newsView.setLayoutParams(newsViewLps);
+            } else if (layoutParams instanceof RelativeLayout.LayoutParams) {
+                RelativeLayout.LayoutParams newsViewLps = (RelativeLayout.LayoutParams) layoutParams;
+                newsViewLps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                int chatBottom = mChatView.getBottom();
+                int parentHeight = parent.getHeight();
+                newsViewLps.bottomMargin = parentHeight - chatBottom;
+                newsView.setLayoutParams(newsViewLps);
+            } else if (layoutParams instanceof FrameLayout.LayoutParams) {
+                FrameLayout.LayoutParams newsViewLps = (FrameLayout.LayoutParams) layoutParams;
+                newsViewLps.gravity = Gravity.BOTTOM;
+                int chatBottom = mChatView.getBottom();
+                int parentHeight = parent.getHeight();
+                newsViewLps.bottomMargin = parentHeight - chatBottom;
+                newsViewLps.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+                newsViewLps.height = FrameLayout.LayoutParams.WRAP_CONTENT;
+                newsView.setLayoutParams(newsViewLps);
+            } else if (layoutParams instanceof LinearLayout.LayoutParams) {
+                LinearLayout.LayoutParams newsViewLps = (LinearLayout.LayoutParams) layoutParams;
+                newsViewLps.width = FrameLayout.LayoutParams.WRAP_CONTENT;
+                newsViewLps.height = DensityUtils.dp2px(AppUtils.getContext(), 36);
+                newsViewLps.topMargin = -newsViewLps.height;
+                newsView.setLayoutParams(newsViewLps);
+            }
 
-            newsView.setLayoutParams(newsViewLps);
             newsView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -125,10 +182,26 @@ public class SimpleChatManager implements ISimpleChat {
     }
 
     private void hideNewsView() {
-        ViewGroup parent = (ViewGroup) mChatView.getParent();
-        TextView newsView = parent.findViewById(R.id.chat_news_id);
+        TextView newsView = getNewsTipsView();
         if (newsView != null) {
             newsView.setVisibility(View.GONE);
         }
+    }
+
+    private int getLastVisibleIndex() {
+        return mLinearManager.findLastCompletelyVisibleItemPosition();
+    }
+
+    private int getItemSize() {
+        return mAdapter.getItemCount();
+    }
+
+    /**
+     * 获取News提示的View
+     * @return textView
+     */
+    private TextView getNewsTipsView() {
+        ViewGroup parent = (ViewGroup) mChatView.getParent();
+        return parent.findViewById(R.id.chat_news_id);
     }
 }
