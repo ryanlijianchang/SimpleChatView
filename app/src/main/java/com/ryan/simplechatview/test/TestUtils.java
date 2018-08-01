@@ -6,6 +6,8 @@ import com.ryan.baselib.util.AppUtils;
 import com.ryan.simplechatview.R;
 import com.ryan.simplechatview.lib.MyChatMsg;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class TestUtils {
@@ -58,6 +60,14 @@ public class TestUtils {
         return msg;
     }
 
+    public static List<MyChatMsg> getRandomMsgList(int size) {
+        List<MyChatMsg> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            list.add(getRandomMsg());
+        }
+        return list;
+    }
+
     private static int getRandomGiftRes() {
         TypedArray ar = AppUtils.getContext().getResources().obtainTypedArray(R.array.test_giftid);
         int len = ar.length();
@@ -80,13 +90,13 @@ public class TestUtils {
     }
 
     private static String getRandomAtUserName() {
-        int ran = new Random().nextInt(2);
-        if (ran != 0) {
+        float atUserProbability = 0.35f;
+        double randomProbability = Math.random();
+        if (randomProbability <= atUserProbability) {
             String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_atusernames);
             return array[new Random().nextInt(array.length)];
-        } else {
-            return null;
         }
+        return null;
     }
 
     private static String getRandomGiftName() {

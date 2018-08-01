@@ -5,11 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.DensityUtils;
@@ -18,6 +14,8 @@ import com.ryan.simplechatview.lib.MyChatMsg;
 import com.ryan.simplechatview.lib.SimpleChatAdapter;
 import com.ryan.simplechatview.lib.SimpleChatView;
 import com.ryan.simplechatview.test.TestUtils;
+
+import java.util.List;
 
 /**
  * @author RyanLee
@@ -28,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private static final int DEFAULT_ITEM_SPACE = DensityUtils.dp2px(AppUtils.getContext(), 3);
 
-    private FloatingActionButton mRandomSendBtn;
+    private FloatingActionButton mSingleMsgBtn;
+    private FloatingActionButton mMultiMsgBtn;
 
     private SimpleChatView mChatView;
     private SimpleChatAdapter mAdapter;
@@ -38,8 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRandomSendBtn = findViewById(R.id.fab_add_comment);
-        mRandomSendBtn.setOnClickListener(this);
+        mSingleMsgBtn = findViewById(R.id.fab_single_message);
+        mSingleMsgBtn.setOnClickListener(this);
+
+        mMultiMsgBtn = findViewById(R.id.fab_multi_message);
+        mMultiMsgBtn.setOnClickListener(this);
 
         mChatView = findViewById(R.id.chat);
         mAdapter = new SimpleChatAdapter(null);
@@ -55,15 +57,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.fab_add_comment:
-                sendRandomMsg();
+            case R.id.fab_single_message:
+                sendRandomSingleMsg();
+                break;
+            case R.id.fab_multi_message:
+                sendRandomMultiMsg();
                 break;
             default:
                 break;
         }
     }
 
-    private void sendRandomMsg() {
+    private void sendRandomMultiMsg() {
+        List<MyChatMsg> list = TestUtils.getRandomMsgList(20);
+        mAdapter.addItemList(list);
+        mChatView.runToBottom();
+    }
+
+    private void sendRandomSingleMsg() {
         MyChatMsg chatMsg = TestUtils.getRandomMsg();
         mAdapter.addItem(chatMsg);
         mChatView.runToBottom();

@@ -78,4 +78,11 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
         mDatas.add(chatMsg);
         notifyItemInserted(getItemCount());
     }
+
+    public synchronized void addItemList(List<MyChatMsg> list) {
+        int startPos = getItemCount();
+        int addSize = ListUtils.isEmpty(list) ? 0 : list.size();
+        mDatas.addAll(list);
+        notifyItemRangeInserted(startPos, addSize);
+    }
 }
