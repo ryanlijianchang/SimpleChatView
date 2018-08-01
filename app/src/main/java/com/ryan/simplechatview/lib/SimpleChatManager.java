@@ -8,6 +8,8 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -179,11 +181,21 @@ public class SimpleChatManager implements ISimpleChat {
             });
         }
         newsView.setVisibility(View.VISIBLE);
+        showTipsAnimation(newsView);
+    }
+
+    private void showTipsAnimation(TextView newsView) {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.1f);
+        alphaAnimation.setDuration(1100);
+        alphaAnimation.setRepeatMode(Animation.RESTART);
+        alphaAnimation.setRepeatCount(Animation.INFINITE);
+        newsView.startAnimation(alphaAnimation);
     }
 
     private void hideNewsView() {
         TextView newsView = getNewsTipsView();
         if (newsView != null) {
+            newsView.clearAnimation();
             newsView.setVisibility(View.GONE);
         }
     }
