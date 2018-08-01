@@ -1,11 +1,13 @@
 package com.ryan.simplechatview.lib;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -50,8 +52,28 @@ public class SimpleChatManager implements ISimpleChat {
 
         initChatView();
         addScrollListener();
+        addTouchListener();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void addTouchListener() {
+        mChatView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        //handledScroll = true;
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
+
+    /**
+     * 监听是否滑动到最新
+     */
     private void addScrollListener() {
         mChatView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -64,13 +86,7 @@ public class SimpleChatManager implements ISimpleChat {
                     if (lastVisibleIndex == itemSize - 1) {
                         hideNewsView();
                     }
-
                 }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
             }
         });
     }
@@ -89,16 +105,37 @@ public class SimpleChatManager implements ISimpleChat {
 
     @Override
     public void sendMultiMsg(List<MyChatMsg> list) {
+        // 如果不是在底部，则不会自动滚动到最新的消息
+        boolean isAtBottom = isAtBottom();
+        if (!isAtBottom) {
+            addNewsView();
+            return;
+        }
+
         mAdapter.addItemList(list);
-        //runToBottom();
-        addNewsView();
+        runToBottom();
     }
 
     @Override
     public void sendSingleMsg(MyChatMsg chatMsg) {
+        // 如果不是在底部，则不会自动滚动到最新的消息
+        boolean isAtBottom = isAtBottom();
+        if (!isAtBottom) {
+            addNewsView();
+            return;
+        }
         mAdapter.addItem(chatMsg);
         runToBottom();
     }
+
+    /**
+     * 是否处于底部
+     * @return true 是 false 否
+     */
+    private boolean isAtBottom() {
+        return mLinearManager.findLastVisibleItemPosition() == mAdapter.getItemCount() - 1;
+    }
+
 
     private void runToBottom() {
         mChatView.post(new Runnable() {
@@ -210,6 +247,7 @@ public class SimpleChatManager implements ISimpleChat {
 
     /**
      * 获取News提示的View
+     *
      * @return textView
      */
     private TextView getNewsTipsView() {
