@@ -21,7 +21,7 @@
         <item>听到这个消息我很难受</item>
         <item>我喜欢阅读和欣赏音乐。</item>
         <item>那家伙～多少次了，也没脸</item>
-        <item>“小白鞋怎么～，他就是不答应。 </item>
+        <item>小白鞋怎么～，他就是不答应。 </item>
         <item>那个姜老板是个土鳖财主，贪财～</item>
         <item>那小子是个～，你可不能理他。 </item>
         <item>我从小就是个大胆，不知什么是害怕，人家都说我..</item>
@@ -169,7 +169,12 @@
         <item>系统消息：主播暂时离开一会，不要离开，马上回来。</item>
         <item>系统消息：网络似乎失去了连接，正在重试中!</item>
         <item>系统消息：当前网络正常。</item>
+    </string-array>
 
-
+    <string-array name="test_activity_news">
+        <item>送礼可以让主播积攒人气，送个礼试试看！</item>
+        <item>成为VIP用户即可享受多种特权，赶紧来体验吧！</item>
+        <item>加入主播后宫粉丝团，找到你的组织，为他/她疯狂打Call！</item>
+        <item>主播连连看，想认识更多的人吗，点击此处进行随机连麦！</item>
     </string-array>
 </resources>

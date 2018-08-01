@@ -12,8 +12,35 @@ public class TestUtils {
     private static int mRandomGift;
 
     private static int getRandomType() {
-        int maxType = 3;
-        return new Random().nextInt(maxType);
+        int maxType = 4;
+        int randomType = new Random().nextInt(maxType);
+
+        float systemNewsProbability = 0.7f;
+        float giftNewsProbability = 0.8f;
+        float activityNewsProbability = 0.4f;
+
+        double randomProbability = Math.random();
+        switch (randomType) {
+            case MyChatMsg.TYPE_SYSTEM_NEWS:
+                if (randomProbability >= systemNewsProbability) {
+                    randomType = MyChatMsg.TYPE_NORMAL_TEXT;
+                }
+                break;
+            case MyChatMsg.TYPE_GIFT_MSG:
+                if (randomProbability >= giftNewsProbability) {
+                    randomType = MyChatMsg.TYPE_NORMAL_TEXT;
+                }
+                break;
+            case MyChatMsg.TYPE_ACTIVITY_NEWS:
+                if (randomProbability >= activityNewsProbability) {
+                    randomType = MyChatMsg.TYPE_NORMAL_TEXT;
+                }
+                break;
+            default:
+                randomType = MyChatMsg.TYPE_NORMAL_TEXT;
+                break;
+        }
+        return randomType;
     }
 
     public static MyChatMsg getRandomMsg() {
@@ -22,6 +49,7 @@ public class TestUtils {
         msg.headLight = getRandomHeadLight();
         msg.content = getRandomContent();
         msg.systemNews = getRandomSystemNews();
+        msg.activityNews = getRandomActivityNews();
         msg.sendUserName = getRandomUserName();
         msg.atUserName = getRandomAtUserName();
         msg.giftName = getRandomGiftName();
@@ -52,8 +80,13 @@ public class TestUtils {
     }
 
     private static String getRandomAtUserName() {
-        String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_atusernames);
-        return array[new Random().nextInt(array.length)];
+        int ran = new Random().nextInt(2);
+        if (ran != 0) {
+            String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_atusernames);
+            return array[new Random().nextInt(array.length)];
+        } else {
+            return null;
+        }
     }
 
     private static String getRandomGiftName() {
@@ -75,5 +108,11 @@ public class TestUtils {
 
     public static int getRandomHeadLight() {
         return new Random().nextInt(3);
+    }
+
+    public static String getRandomActivityNews() {
+        String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_activity_news);
+        return array[new Random().nextInt(array.length)];
+
     }
 }

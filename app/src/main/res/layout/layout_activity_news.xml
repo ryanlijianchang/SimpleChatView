@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tv_activity_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp8"
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_marginRight="@dimen/dp8"
+        android:layout_marginStart="@dimen/dp8"
+        android:background="@drawable/bg_activity_news"
+        android:drawableLeft="@drawable/ic_activity"
+        android:drawablePadding="@dimen/dp5"
+        android:drawableStart="@drawable/ic_activity"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/dp3"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp14" />
+</android.support.constraint.ConstraintLayout>

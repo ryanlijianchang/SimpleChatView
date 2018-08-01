@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.ListUtils;
 import com.ryan.simplechatview.R;
+import com.ryan.simplechatview.demo.ActivityNewsHolder;
 import com.ryan.simplechatview.demo.GiftNewsHolder;
 import com.ryan.simplechatview.demo.HeaderChatHolder;
 import com.ryan.simplechatview.demo.NormalChatHolder;
@@ -39,6 +40,8 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
                 return new SystemNewsHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_system_news_text, parent, false));
             case MyChatMsg.TYPE_GIFT_MSG:
                 return new GiftNewsHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_gift_text, parent, false));
+            case MyChatMsg.TYPE_ACTIVITY_NEWS:
+                return new ActivityNewsHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_activity_news, parent, false));
             case TYPE_HEADER:
             default:
                 return new HeaderChatHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_header_text, parent, false));

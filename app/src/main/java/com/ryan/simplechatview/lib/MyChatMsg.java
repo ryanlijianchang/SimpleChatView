@@ -13,6 +13,10 @@ public class MyChatMsg extends BaseChatMsg {
      * 礼物消息
      */
     public static final int TYPE_GIFT_MSG = 2;
+    /**
+     * 活动消息
+     */
+    public static final int TYPE_ACTIVITY_NEWS = 3;
 
 
     // 头灯类型 VIP
@@ -38,6 +42,10 @@ public class MyChatMsg extends BaseChatMsg {
      * 系统消息
      */
     public String systemNews;
+    /***
+     * 活动消息
+     */
+    public String activityNews;
     /**
      * 发送者名字
      */
