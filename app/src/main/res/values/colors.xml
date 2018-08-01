@@ -15,4 +15,7 @@
     <color name="color_chat_username">#cacaca</color>
     <color name="color_chat_at_username">#80D640</color>
 
+    <color name="color_chat_news">#1296db</color>
+
+
 </resources>

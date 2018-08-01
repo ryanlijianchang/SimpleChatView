@@ -19,5 +19,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.ryanlijianchang:AndroidBaseLib:0.0.9'
+    implementation 'com.github.ryanlijianchang:AndroidBaseLib:0.0.1'
 }
