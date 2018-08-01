@@ -32,6 +32,7 @@ import java.util.List;
 public class SimpleChatManager implements ISimpleChat {
     private static final int DEFAULT_ITEM_SPACE = DensityUtils.dp2px(AppUtils.getContext(), 3);
     private static final int DEFAULT_SCROLL_ITEM_NUM = 10;
+    private static final int DEFAULT_MAX_CHAT_NUM = 100;
 
     private RecyclerView mChatView;
     private SimpleChatAdapter mAdapter;
@@ -45,6 +46,10 @@ public class SimpleChatManager implements ISimpleChat {
      * 默认滚动条数
      */
     private int mScrollItemNum = DEFAULT_SCROLL_ITEM_NUM;
+    /**
+     * 最多公屏数
+     */
+    private int mMaxChatNum = DEFAULT_MAX_CHAT_NUM;
 
 
     public SimpleChatManager(RecyclerView mRecyclerView) {
@@ -111,8 +116,8 @@ public class SimpleChatManager implements ISimpleChat {
             addNewsView();
             return;
         }
-
         mAdapter.addItemList(list);
+        removeOverItems();
         runToBottom();
     }
 
@@ -125,7 +130,16 @@ public class SimpleChatManager implements ISimpleChat {
             return;
         }
         mAdapter.addItem(chatMsg);
+        removeOverItems();
         runToBottom();
+    }
+
+    private void removeOverItems() {
+        int dataSize = getDataSize();
+        if (dataSize > mMaxChatNum) {
+            int beyondSize = dataSize - mMaxChatNum;
+            mAdapter.removeItems(0, beyondSize);
+        }
     }
 
     /**
@@ -243,6 +257,10 @@ public class SimpleChatManager implements ISimpleChat {
 
     private int getItemSize() {
         return mAdapter.getItemCount();
+    }
+
+    private int getDataSize() {
+        return mAdapter.getItemCount() - 1;
     }
 
     /**

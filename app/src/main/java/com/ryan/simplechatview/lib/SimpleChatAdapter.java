@@ -2,6 +2,7 @@ package com.ryan.simplechatview.lib;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -84,5 +85,12 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
         int addSize = ListUtils.isEmpty(list) ? 0 : list.size();
         mDatas.addAll(list);
         notifyItemRangeInserted(startPos, addSize);
+    }
+
+    public synchronized void removeItems(int startPos, int endPos) {
+        Log.d("Ryan", "startPos=" + startPos + ", endPos=" + endPos + ", mDatas=" + mDatas.toString());
+        mDatas.subList(startPos, endPos).clear();
+        Log.d("Ryan", "mDatas=" + mDatas.toString());
+        notifyItemRangeRemoved(1, (endPos - startPos));
     }
 }
