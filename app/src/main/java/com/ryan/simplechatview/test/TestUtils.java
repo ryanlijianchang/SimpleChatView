@@ -9,16 +9,17 @@ import com.ryan.simplechatview.lib.MyChatMsg;
 import java.util.Random;
 
 public class TestUtils {
-    private static int maxType = 3;
     private static int mRandomGift;
 
     private static int getRandomType() {
+        int maxType = 3;
         return new Random().nextInt(maxType);
     }
 
     public static MyChatMsg getRandomMsg() {
         MyChatMsg msg = new MyChatMsg();
         msg.type = getRandomType();
+        msg.headLight = getRandomHeadLight();
         msg.content = getRandomContent();
         msg.systemNews = getRandomSystemNews();
         msg.sendUserName = getRandomUserName();
@@ -70,5 +71,9 @@ public class TestUtils {
     public static String getRandomSystemNews() {
         String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_system_news);
         return array[new Random().nextInt(array.length)];
+    }
+
+    public static int getRandomHeadLight() {
+        return new Random().nextInt(3);
     }
 }

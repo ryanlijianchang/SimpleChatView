@@ -35,6 +35,25 @@ public class GiftNewsHolder extends BaseChatViewHolder {
         String strSendTo = AppUtils.getContext().getResources().getString(R.string.str_send_to);
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
+        if (data.headLight > 0) {
+            // 设置头灯
+            int resId;
+            switch (data.headLight) {
+                case MyChatMsg.HEAD_LIGHT_VIP:
+                    resId = R.drawable.ic_vip;
+                    break;
+                case MyChatMsg.HEAD_LIGHT_DIAMOND:
+                    resId = R.drawable.ic_diamond;
+                    break;
+                default:
+                    return;
+            }
+            builder.append(" ");
+            int imageNewSize = DensityUtils.dp2px(AppUtils.getContext(), 24);
+            CenteredImageSpan vipSpan = new CenteredImageSpan(AppUtils.getContext(), BitmapUtils.decodeResToBitmap(resId, imageNewSize, imageNewSize));
+            builder.setSpan(vipSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
         builder.append(data.sendUserName).append(strTo).append(strSendTo).append(data.giftName);
         int leftLen = builder.length();
         builder.append(" ").append(data.giftNum);

@@ -14,10 +14,22 @@ public class MyChatMsg extends BaseChatMsg {
      */
     public static final int TYPE_GIFT_MSG = 2;
 
+
+    // 头灯类型 VIP
+    public static final int HEAD_LIGHT_VIP = 1;
+    // 头灯类型 钻石用户
+    public static final int HEAD_LIGHT_DIAMOND = 2;
+
+
     /**
      * 公屏类型
      */
     public int type;
+    /**
+     * 尾灯类型
+     * TYPE_VIP = 1, TYPE_DIAMOND = 2
+     */
+    public int headLight;
     /**
      * 内容
      */
