@@ -5,14 +5,19 @@ import android.os.Looper;
 
 import com.ryan.baselib.util.ListUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 公屏缓冲池
+ * @author RyanLee
+ */
 public class BufferChat implements IBufferChat {
     private Handler mUIHandler = new Handler(Looper.getMainLooper());
 
     private ISimpleChat iSimpleChat;
 
-    private List<MyChatMsg> mBufferMsgs;
+    private List<MyChatMsg> mBufferLists;
 
     private static final int REPEAT_TIME = 400;
 
@@ -20,6 +25,7 @@ public class BufferChat implements IBufferChat {
 
     public BufferChat(ISimpleChat chatManager) {
         this.iSimpleChat = chatManager;
+        mBufferLists = new ArrayList<>();
     }
 
     @Override
@@ -34,7 +40,7 @@ public class BufferChat implements IBufferChat {
             return;
         }
         synchronized (LOCK) {
-            mBufferMsgs.add(chatMsg);
+            mBufferLists.add(chatMsg);
         }
     }
 
@@ -44,7 +50,7 @@ public class BufferChat implements IBufferChat {
             return;
         }
         synchronized (LOCK) {
-            mBufferMsgs.addAll(chatLists);
+            mBufferLists.addAll(chatLists);
         }
     }
 
@@ -52,8 +58,8 @@ public class BufferChat implements IBufferChat {
     public void release() {
         mUIHandler.removeCallbacks(this);
         iSimpleChat = null;
-        mBufferMsgs.clear();
-        mBufferMsgs = null;
+        mBufferLists.clear();
+        mBufferLists = null;
     }
 
     @Override
@@ -62,14 +68,15 @@ public class BufferChat implements IBufferChat {
             return;
         }
 
-        if (ListUtils.isEmpty(mBufferMsgs)) {
+        if (ListUtils.isEmpty(mBufferLists)) {
             mUIHandler.removeCallbacks(this);
             mUIHandler.postDelayed(this, REPEAT_TIME);
+            return;
         }
 
         synchronized (LOCK) {
-            iSimpleChat.updateChatView(mBufferMsgs);
-            mBufferMsgs.clear();
+            iSimpleChat.updateChatView(mBufferLists);
+            mBufferLists.clear();
         }
         mUIHandler.removeCallbacks(this);
         mUIHandler.postDelayed(this, REPEAT_TIME);
