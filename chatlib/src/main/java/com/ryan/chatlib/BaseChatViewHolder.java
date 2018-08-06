@@ -28,7 +28,7 @@ public abstract class BaseChatViewHolder extends RecyclerView.ViewHolder impleme
         return view;
     }
 
-    public View getView(@IdRes int viewId) {
+    protected View getView(@IdRes int viewId) {
         return findViewById(viewId);
     }
 }

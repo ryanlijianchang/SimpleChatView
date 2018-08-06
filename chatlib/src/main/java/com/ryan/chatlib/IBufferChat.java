@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author RyanLee
  */
-public interface IBufferChat<D> extends Runnable {
+public interface IBufferChat<D extends BaseChatMsg> extends Runnable {
     /**
      * 开始
      */

@@ -7,7 +7,7 @@ import android.view.View;
 public class ChatDecoration extends RecyclerView.ItemDecoration {
     private int space;
 
-    public ChatDecoration(int space) {
+    ChatDecoration(int space) {
         this.space = space;
     }
 

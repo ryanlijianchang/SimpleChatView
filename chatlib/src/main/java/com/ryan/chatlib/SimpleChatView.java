@@ -7,8 +7,11 @@ import android.util.AttributeSet;
 
 import java.util.List;
 
+/**
+ * @author RyanLee
+ */
 public class SimpleChatView<D extends BaseChatMsg, T extends BaseChatAdapter> extends RecyclerView {
-    private SimpleChatManager mSimpleChatManager;
+    private SimpleChatManager<D> mSimpleChatManager;
 
     public SimpleChatView(Context context) {
         this(context, null);
@@ -25,7 +28,7 @@ public class SimpleChatView<D extends BaseChatMsg, T extends BaseChatAdapter> ex
     }
 
     private void init() {
-        mSimpleChatManager = new SimpleChatManager(this);
+        mSimpleChatManager = new SimpleChatManager<>(this);
     }
 
     public SimpleChatView setAdapter(T mBaseAdapter) {

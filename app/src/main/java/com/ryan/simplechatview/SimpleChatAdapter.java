@@ -26,7 +26,7 @@ public class SimpleChatAdapter extends BaseChatAdapter<MyChatMsg> {
 
     private List<MyChatMsg> mDatas;
 
-    public SimpleChatAdapter(List<MyChatMsg> datas) {
+    SimpleChatAdapter(List<MyChatMsg> datas) {
         if (ListUtils.isEmpty(datas)) {
             mDatas = new ArrayList<>();
         } else {
@@ -97,5 +97,6 @@ public class SimpleChatAdapter extends BaseChatAdapter<MyChatMsg> {
         mDatas.addAll(list);
         notifyItemRangeInserted(startPos, addSize);
     }
+
 
 }

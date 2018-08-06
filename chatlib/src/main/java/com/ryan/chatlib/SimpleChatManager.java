@@ -1,6 +1,5 @@
 package com.ryan.chatlib;
 
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -8,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -49,32 +47,16 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     /**
      * 缓冲区
      */
-    private IBufferChat iBufferChat;
+    private IBufferChat<D> iBufferChat;
 
 
-    public SimpleChatManager(@NonNull RecyclerView mRecyclerView) {
+    SimpleChatManager(@NonNull RecyclerView mRecyclerView) {
         this.mChatView = mRecyclerView;
     }
 
     private void initBufferChat() {
-        iBufferChat = new BufferChat(this);
+        iBufferChat = new BufferChat<>(this);
         iBufferChat.play();
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void addTouchListener() {
-        mChatView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        //handledScroll = true;
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
     }
 
     /**
@@ -295,7 +277,6 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     public void ready() {
         initChatView();
         addScrollListener();
-        addTouchListener();
         initBufferChat();
     }
 

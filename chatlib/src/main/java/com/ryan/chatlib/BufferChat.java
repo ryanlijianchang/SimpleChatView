@@ -10,9 +10,10 @@ import java.util.List;
 
 /**
  * 公屏缓冲池
+ *
  * @author RyanLee
  */
-public class BufferChat<D> implements IBufferChat<D> {
+public class BufferChat<D extends BaseChatMsg> implements IBufferChat<D> {
     private Handler mUIHandler = new Handler(Looper.getMainLooper());
 
     private ISimpleChat iSimpleChat;
@@ -23,7 +24,7 @@ public class BufferChat<D> implements IBufferChat<D> {
 
     private static final Object LOCK = new Object();
 
-    public BufferChat(ISimpleChat chatManager) {
+    BufferChat(ISimpleChat chatManager) {
         this.iSimpleChat = chatManager;
         mBufferLists = new ArrayList<>();
     }
