@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.ryan.simplechatview"
         minSdkVersion 14
@@ -19,5 +19,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.ryanlijianchang:AndroidBaseLib:0.0.1'
+    implementation 'com.ryan.base-lib:base-lib:0.0.4'
 }
