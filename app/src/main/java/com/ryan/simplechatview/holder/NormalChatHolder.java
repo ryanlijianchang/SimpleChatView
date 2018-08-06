@@ -1,4 +1,4 @@
-package com.ryan.simplechatview.demo;
+package com.ryan.simplechatview.holder;
 
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -13,9 +13,9 @@ import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.BitmapUtils;
 import com.ryan.baselib.util.DensityUtils;
 import com.ryan.baselib.widget.CenteredImageSpan;
+import com.ryan.chatlib.BaseChatViewHolder;
+import com.ryan.simplechatview.MyChatMsg;
 import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.lib.BaseChatViewHolder;
-import com.ryan.simplechatview.lib.MyChatMsg;
 
 public class NormalChatHolder extends BaseChatViewHolder {
 
@@ -24,7 +24,8 @@ public class NormalChatHolder extends BaseChatViewHolder {
     }
 
     @Override
-    public void bindData(MyChatMsg data, int position) {
+    public void bindData(Object obj, int position) {
+        MyChatMsg data = (MyChatMsg) obj;
         TextView text = (TextView) getView(R.id.tv_normal_text_msg);
         SpannableStringBuilder builder = new SpannableStringBuilder();
         if (data.headLight > 0) {

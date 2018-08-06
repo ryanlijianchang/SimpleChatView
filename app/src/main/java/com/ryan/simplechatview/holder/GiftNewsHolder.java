@@ -1,4 +1,4 @@
-package com.ryan.simplechatview.demo;
+package com.ryan.simplechatview.holder;
 
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -13,9 +13,9 @@ import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.BitmapUtils;
 import com.ryan.baselib.util.DensityUtils;
 import com.ryan.baselib.widget.CenteredImageSpan;
+import com.ryan.chatlib.BaseChatViewHolder;
+import com.ryan.simplechatview.MyChatMsg;
 import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.lib.BaseChatViewHolder;
-import com.ryan.simplechatview.lib.MyChatMsg;
 
 /**
  * 送礼的Holder
@@ -29,7 +29,8 @@ public class GiftNewsHolder extends BaseChatViewHolder {
     }
 
     @Override
-    public void bindData(MyChatMsg data, int position) {
+    public void bindData(Object obj, int position) {
+        MyChatMsg data = (MyChatMsg) obj;
         TextView tips = (TextView) getView(R.id.tv_gift_msg);
         String strTo = AppUtils.getContext().getResources().getString(R.string.str_to);
         String strSendTo = AppUtils.getContext().getResources().getString(R.string.str_send_to);

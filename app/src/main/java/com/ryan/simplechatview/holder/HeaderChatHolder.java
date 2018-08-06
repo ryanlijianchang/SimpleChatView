@@ -1,12 +1,11 @@
-package com.ryan.simplechatview.demo;
+package com.ryan.simplechatview.holder;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.ryan.baselib.util.AppUtils;
+import com.ryan.chatlib.BaseChatViewHolder;
 import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.lib.BaseChatViewHolder;
-import com.ryan.simplechatview.lib.MyChatMsg;
 
 public class HeaderChatHolder extends BaseChatViewHolder {
 
@@ -15,7 +14,7 @@ public class HeaderChatHolder extends BaseChatViewHolder {
     }
 
     @Override
-    public void bindData(MyChatMsg data, int position) {
+    public void bindData(Object obj, int position) {
         TextView tips = (TextView) getView(R.id.tv_header_text_msg);
         tips.setText(AppUtils.getContext().getResources().getString(R.string.test_healthy_live));
     }

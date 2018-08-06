@@ -17,7 +17,7 @@
 
     <include layout="@layout/layout_bottom_panel" />
 
-    <android.support.v7.widget.RecyclerView
+    <com.ryan.chatlib.SimpleChatView
         android:id="@+id/chat"
         android:layout_width="match_parent"
         android:layout_height="300dp"

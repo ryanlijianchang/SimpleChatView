@@ -1,10 +1,10 @@
-package com.ryan.simplechatview.test;
+package com.ryan.simplechatview.testdata;
 
 import android.content.res.TypedArray;
 
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.lib.MyChatMsg;
+import com.ryan.simplechatview.MyChatMsg;
 
 import java.util.ArrayList;
 import java.util.List;

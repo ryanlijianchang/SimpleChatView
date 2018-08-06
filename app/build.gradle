@@ -19,5 +19,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.ryan.base-lib:base-lib:0.0.4'
+    implementation 'com.ryan.base-lib:base-lib:0.0.5'
+    implementation project(':chatlib')
 }

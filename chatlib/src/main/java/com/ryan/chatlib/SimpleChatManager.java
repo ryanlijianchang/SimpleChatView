@@ -1,7 +1,8 @@
-package com.ryan.simplechatview.lib;
+package com.ryan.chatlib;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,6 @@ import android.widget.TextView;
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.DensityUtils;
 import com.ryan.baselib.util.ResourceUtils;
-import com.ryan.simplechatview.R;
 
 import java.util.List;
 
@@ -29,13 +29,13 @@ import java.util.List;
  *
  * @author RyanLee
  */
-public class SimpleChatManager implements ISimpleChat {
+public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> {
     private static final int DEFAULT_ITEM_SPACE = DensityUtils.dp2px(AppUtils.getContext(), 3);
     private static final int DEFAULT_SCROLL_ITEM_NUM = 10;
     private static final int DEFAULT_MAX_CHAT_NUM = 100;
 
     private RecyclerView mChatView;
-    private SimpleChatAdapter mAdapter;
+    private BaseChatAdapter mAdapter;
     private LinearLayoutManager mLinearManager;
 
     /**
@@ -52,13 +52,8 @@ public class SimpleChatManager implements ISimpleChat {
     private IBufferChat iBufferChat;
 
 
-    public SimpleChatManager(RecyclerView mRecyclerView) {
+    public SimpleChatManager(@NonNull RecyclerView mRecyclerView) {
         this.mChatView = mRecyclerView;
-
-        initChatView();
-        addScrollListener();
-        addTouchListener();
-        initBufferChat();
     }
 
     private void initBufferChat() {
@@ -103,7 +98,6 @@ public class SimpleChatManager implements ISimpleChat {
     }
 
     private void initChatView() {
-        mAdapter = new SimpleChatAdapter(null);
         // 设置Item间距
         mChatView.addItemDecoration(new ChatDecoration(mItemSpace));
         // 设置LayoutManager
@@ -115,21 +109,21 @@ public class SimpleChatManager implements ISimpleChat {
 
 
     @Override
-    public void sendMultiMsg(List<MyChatMsg> list) {
+    public void sendMultiMsg(List<D> list) {
         if (iBufferChat != null) {
             iBufferChat.addChat(list);
         }
     }
 
     @Override
-    public void sendSingleMsg(MyChatMsg chatMsg) {
+    public void sendSingleMsg(D chatMsg) {
         if (iBufferChat != null) {
             iBufferChat.addChat(chatMsg);
         }
     }
 
     @Override
-    public void updateChatView(List<MyChatMsg> mBufferLists) {
+    public void updateChatView(List<D> mBufferLists) {
         // 如果不是在底部，则不会自动滚动到最新的消息
         boolean isAtBottom = isAtBottom();
         if (!isAtBottom) {
@@ -294,5 +288,15 @@ public class SimpleChatManager implements ISimpleChat {
         return parent.findViewById(R.id.chat_news_id);
     }
 
+    public void setAdapter(BaseChatAdapter adapter) {
+        this.mAdapter = adapter;
+    }
+
+    public void ready() {
+        initChatView();
+        addScrollListener();
+        addTouchListener();
+        initBufferChat();
+    }
 
 }

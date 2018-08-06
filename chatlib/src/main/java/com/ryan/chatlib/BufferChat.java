@@ -1,4 +1,4 @@
-package com.ryan.simplechatview.lib;
+package com.ryan.chatlib;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -12,12 +12,12 @@ import java.util.List;
  * 公屏缓冲池
  * @author RyanLee
  */
-public class BufferChat implements IBufferChat {
+public class BufferChat<D> implements IBufferChat<D> {
     private Handler mUIHandler = new Handler(Looper.getMainLooper());
 
     private ISimpleChat iSimpleChat;
 
-    private List<MyChatMsg> mBufferLists;
+    private List<D> mBufferLists;
 
     private static final int REPEAT_TIME = 400;
 
@@ -35,7 +35,7 @@ public class BufferChat implements IBufferChat {
     }
 
     @Override
-    public void addChat(MyChatMsg chatMsg) {
+    public void addChat(D chatMsg) {
         if (chatMsg == null) {
             return;
         }
@@ -45,7 +45,7 @@ public class BufferChat implements IBufferChat {
     }
 
     @Override
-    public void addChat(List<MyChatMsg> chatLists) {
+    public void addChat(List<D> chatLists) {
         if (ListUtils.isEmpty(chatLists)) {
             return;
         }

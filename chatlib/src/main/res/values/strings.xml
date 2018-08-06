@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ChatLib</string>
+    <string name="str_news">News</string>
+
 </resources>

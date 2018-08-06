@@ -1,4 +1,6 @@
-package com.ryan.simplechatview.lib;
+package com.ryan.simplechatview;
+
+import com.ryan.chatlib.BaseChatMsg;
 
 public class MyChatMsg extends BaseChatMsg {
     /**

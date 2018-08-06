@@ -12,7 +12,7 @@
         android:background="@drawable/bg_broadcast_info"
         app:layout_constraintLeft_toLeftOf="parent">
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:id="@+id/iv_broadcast_info_header"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -72,35 +72,35 @@
         android:orientation="horizontal"
         app:layout_constraintLeft_toRightOf="@id/rl_broadcast_info_left">
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:src="@drawable/ic_viewer_1" />
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:src="@drawable/ic_viewer_2" />
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:src="@drawable/ic_viewer_3" />
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:src="@drawable/ic_viewer_4" />
 
-        <com.ryan.simplechatview.CircleImageView
+        <com.ryan.baselib.widget.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"

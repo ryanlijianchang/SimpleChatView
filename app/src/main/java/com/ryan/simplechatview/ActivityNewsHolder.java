@@ -1,4 +1,4 @@
-package com.ryan.simplechatview.demo;
+package com.ryan.simplechatview;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -7,9 +7,7 @@ import android.widget.TextView;
 
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.DensityUtils;
-import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.lib.BaseChatViewHolder;
-import com.ryan.simplechatview.lib.MyChatMsg;
+import com.ryan.chatlib.BaseChatViewHolder;
 
 public class ActivityNewsHolder extends BaseChatViewHolder {
 
@@ -18,7 +16,8 @@ public class ActivityNewsHolder extends BaseChatViewHolder {
     }
 
     @Override
-    public void bindData(MyChatMsg data, int position) {
+    public void bindData(Object obj, int position) {
+        MyChatMsg data = (MyChatMsg) obj;
         TextView textView = (TextView) getView(R.id.tv_activity_news);
         Drawable drawableLeft = ContextCompat.getDrawable(AppUtils.getContext(), R.drawable.ic_activity);
         Drawable drawableRight = ContextCompat.getDrawable(AppUtils.getContext(), R.drawable.ic_arrow);

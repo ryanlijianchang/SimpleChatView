@@ -1,22 +1,27 @@
-package com.ryan.simplechatview.lib;
+package com.ryan.simplechatview;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.ListUtils;
+import com.ryan.chatlib.BaseChatAdapter;
+import com.ryan.chatlib.BaseChatViewHolder;
+import com.ryan.simplechatview.ActivityNewsHolder;
+import com.ryan.simplechatview.MyChatMsg;
 import com.ryan.simplechatview.R;
-import com.ryan.simplechatview.demo.ActivityNewsHolder;
-import com.ryan.simplechatview.demo.GiftNewsHolder;
-import com.ryan.simplechatview.demo.HeaderChatHolder;
-import com.ryan.simplechatview.demo.NormalChatHolder;
-import com.ryan.simplechatview.demo.SystemNewsHolder;
+import com.ryan.simplechatview.holder.GiftNewsHolder;
+import com.ryan.simplechatview.holder.HeaderChatHolder;
+import com.ryan.simplechatview.holder.NormalChatHolder;
+import com.ryan.simplechatview.holder.SystemNewsHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> {
+/**
+ * @author RyanLee
+ */
+public class SimpleChatAdapter extends BaseChatAdapter<MyChatMsg> {
     private static final int TYPE_HEADER = -1000;
 
     private List<MyChatMsg> mDatas;
@@ -72,11 +77,20 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
         return ListUtils.isEmpty(mDatas) ? 1 : mDatas.size() + 1;
     }
 
+    @Override
+    public synchronized void removeItems(int startPos, int endPos) {
+        mDatas.subList(startPos, endPos).clear();
+        notifyItemRangeRemoved(1, (endPos - startPos));
+    }
+
+
+    @Override
     public synchronized void addItem(MyChatMsg chatMsg) {
         mDatas.add(chatMsg);
         notifyItemInserted(getItemCount());
     }
 
+    @Override
     public synchronized void addItemList(List<MyChatMsg> list) {
         int startPos = getItemCount();
         int addSize = ListUtils.isEmpty(list) ? 0 : list.size();
@@ -84,8 +98,4 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
         notifyItemRangeInserted(startPos, addSize);
     }
 
-    public synchronized void removeItems(int startPos, int endPos) {
-        mDatas.subList(startPos, endPos).clear();
-        notifyItemRangeRemoved(1, (endPos - startPos));
-    }
 }

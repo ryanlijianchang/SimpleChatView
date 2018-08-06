@@ -1,4 +1,4 @@
-package com.ryan.simplechatview.lib;
+package com.ryan.chatlib;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

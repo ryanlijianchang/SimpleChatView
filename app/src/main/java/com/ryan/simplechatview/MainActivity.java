@@ -3,17 +3,16 @@ package com.ryan.simplechatview;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.ryan.simplechatview.lib.SimpleChatManager;
-import com.ryan.simplechatview.test.TestUtils;
+import com.ryan.chatlib.SimpleChatView;
+import com.ryan.simplechatview.testdata.TestUtils;
 
 /**
  * @author RyanLee
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private SimpleChatManager mSimpleChatManager;
+    private SimpleChatView<MyChatMsg, SimpleChatAdapter> mChatView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +31,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton mMultiMsgBtn = findViewById(R.id.fab_multi_message);
         mMultiMsgBtn.setOnClickListener(this);
 
-        RecyclerView mChatView = findViewById(R.id.chat);
+        mChatView = findViewById(R.id.chat);
 
-        // 初始化SimpleChatManager
-        mSimpleChatManager = new SimpleChatManager(mChatView);
+        SimpleChatAdapter adapter = new SimpleChatAdapter(null);
+        mChatView.setAdapter(adapter).setUp();
+
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab_single_message:
-                mSimpleChatManager.sendSingleMsg(TestUtils.getRandomMsg());
+                mChatView.sendSingleMsg(TestUtils.getRandomMsg());
                 break;
             case R.id.fab_multi_message:
-                mSimpleChatManager.sendMultiMsg(TestUtils.getRandomMsgList(10));
+                mChatView.sendMultiMsg(TestUtils.getRandomMsgList(10));
                 break;
             default:
                 break;
