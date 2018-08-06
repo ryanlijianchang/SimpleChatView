@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mSimpleChatManager.sendSingleMsg(TestUtils.getRandomMsg());
                 break;
             case R.id.fab_multi_message:
-                mSimpleChatManager.sendMultiMsg(TestUtils.getRandomMsgList(20));
+                mSimpleChatManager.sendMultiMsg(TestUtils.getRandomMsgList(10));
                 break;
             default:
                 break;

@@ -47,6 +47,7 @@
         android:id="@+id/fab_multi_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp15"
         android:layout_marginEnd="@dimen/dp10"
         android:layout_marginRight="@dimen/dp10"
         android:clickable="true"

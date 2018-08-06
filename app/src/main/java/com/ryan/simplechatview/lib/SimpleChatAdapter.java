@@ -32,7 +32,6 @@ public class SimpleChatAdapter extends RecyclerView.Adapter<BaseChatViewHolder> 
     @Override
     public BaseChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
-
             case MyChatMsg.TYPE_NORMAL_TEXT:
                 return new NormalChatHolder(LayoutInflater.from(AppUtils.getContext()).inflate(R.layout.layout_normal_text, parent, false));
             case MyChatMsg.TYPE_SYSTEM_NEWS:

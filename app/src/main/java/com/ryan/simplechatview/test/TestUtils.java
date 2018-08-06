@@ -106,21 +106,21 @@ public class TestUtils {
     }
 
 
-    public static String getRandomGiftNum() {
+    private static String getRandomGiftNum() {
         String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_giftnum);
         return array[new Random().nextInt(array.length)];
     }
 
-    public static String getRandomSystemNews() {
+    private static String getRandomSystemNews() {
         String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_system_news);
         return array[new Random().nextInt(array.length)];
     }
 
-    public static int getRandomHeadLight() {
+    private static int getRandomHeadLight() {
         return new Random().nextInt(3);
     }
 
-    public static String getRandomActivityNews() {
+    private static String getRandomActivityNews() {
         String[] array = AppUtils.getContext().getResources().getStringArray(R.array.test_activity_news);
         return array[new Random().nextInt(array.length)];
 

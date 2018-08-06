@@ -47,9 +47,9 @@ public class SimpleChatManager implements ISimpleChat {
      */
     private int mScrollItemNum = DEFAULT_SCROLL_ITEM_NUM;
     /**
-     * 最多公屏数
+     * 缓冲区
      */
-    private int mMaxChatNum = DEFAULT_MAX_CHAT_NUM;
+    private IBufferChat iBufferChat;
 
 
     public SimpleChatManager(RecyclerView mRecyclerView) {
@@ -58,6 +58,12 @@ public class SimpleChatManager implements ISimpleChat {
         initChatView();
         addScrollListener();
         addTouchListener();
+        initBufferChat();
+    }
+
+    private void initBufferChat() {
+        iBufferChat = new BufferChat(this);
+        iBufferChat.play();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -110,32 +116,46 @@ public class SimpleChatManager implements ISimpleChat {
 
     @Override
     public void sendMultiMsg(List<MyChatMsg> list) {
-        // 如果不是在底部，则不会自动滚动到最新的消息
-        boolean isAtBottom = isAtBottom();
-        if (!isAtBottom) {
-            addNewsView();
-            return;
+        if (iBufferChat != null) {
+            iBufferChat.addChat(list);
         }
-        mAdapter.addItemList(list);
-        removeOverItems();
-        runToBottom();
     }
 
     @Override
     public void sendSingleMsg(MyChatMsg chatMsg) {
+        if (iBufferChat != null) {
+            iBufferChat.addChat(chatMsg);
+        }
+    }
+
+    @Override
+    public void updateChatView(List<MyChatMsg> mBufferLists) {
         // 如果不是在底部，则不会自动滚动到最新的消息
         boolean isAtBottom = isAtBottom();
         if (!isAtBottom) {
             addNewsView();
-            return;
+            mAdapter.addItemList(mBufferLists);
+            removeOverItems();
+        } else {
+            mAdapter.addItemList(mBufferLists);
+            removeOverItems();
+            runToBottom();
         }
-        mAdapter.addItem(chatMsg);
-        removeOverItems();
-        runToBottom();
+
+
+    }
+
+    @Override
+    public void release() {
+        hideNewsView();
+        if (iBufferChat != null) {
+            iBufferChat.release();
+        }
     }
 
     private void removeOverItems() {
         int dataSize = getDataSize();
+        int mMaxChatNum = DEFAULT_MAX_CHAT_NUM;
         if (dataSize > mMaxChatNum) {
             int beyondSize = dataSize - mMaxChatNum;
             mAdapter.removeItems(0, beyondSize);
@@ -144,6 +164,7 @@ public class SimpleChatManager implements ISimpleChat {
 
     /**
      * 是否处于底部
+     *
      * @return true 是 false 否
      */
     private boolean isAtBottom() {
@@ -272,4 +293,6 @@ public class SimpleChatManager implements ISimpleChat {
         ViewGroup parent = (ViewGroup) mChatView.getParent();
         return parent.findViewById(R.id.chat_news_id);
     }
+
+
 }
