@@ -5,6 +5,9 @@ import android.content.Context;
 
 import com.ryan.baselib.util.AppUtils;
 
+/**
+ * @author RyanLee
+ */
 public class MyApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {

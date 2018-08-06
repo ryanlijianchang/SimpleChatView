@@ -2,6 +2,9 @@ package com.ryan.simplechatview;
 
 import com.ryan.chatlib.BaseChatMsg;
 
+/**
+ * @author RyanLee
+ */
 public class MyChatMsg extends BaseChatMsg {
     /**
      * 普通聊天消息

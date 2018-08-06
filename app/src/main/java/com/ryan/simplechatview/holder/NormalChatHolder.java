@@ -17,6 +17,10 @@ import com.ryan.chatlib.BaseChatViewHolder;
 import com.ryan.simplechatview.MyChatMsg;
 import com.ryan.simplechatview.R;
 
+/**
+ * 普通消息
+ * @author RyanLee
+ */
 public class NormalChatHolder extends BaseChatViewHolder {
 
     public NormalChatHolder(View itemView) {

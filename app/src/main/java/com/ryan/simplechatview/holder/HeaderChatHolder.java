@@ -7,6 +7,10 @@ import com.ryan.baselib.util.AppUtils;
 import com.ryan.chatlib.BaseChatViewHolder;
 import com.ryan.simplechatview.R;
 
+/**
+ * 头部信息
+ * @author RyanLee
+ */
 public class HeaderChatHolder extends BaseChatViewHolder {
 
     public HeaderChatHolder(View itemView) {

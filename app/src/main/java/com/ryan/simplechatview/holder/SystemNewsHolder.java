@@ -7,6 +7,10 @@ import com.ryan.chatlib.BaseChatViewHolder;
 import com.ryan.simplechatview.MyChatMsg;
 import com.ryan.simplechatview.R;
 
+/**
+ * 系统消息
+ * @author RyanLee
+ */
 public class SystemNewsHolder extends BaseChatViewHolder {
     public SystemNewsHolder(View itemView) {
         super(itemView);

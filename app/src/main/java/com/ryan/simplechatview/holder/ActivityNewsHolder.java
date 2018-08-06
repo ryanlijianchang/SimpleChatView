@@ -1,4 +1,4 @@
-package com.ryan.simplechatview;
+package com.ryan.simplechatview.holder;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -8,7 +8,12 @@ import android.widget.TextView;
 import com.ryan.baselib.util.AppUtils;
 import com.ryan.baselib.util.DensityUtils;
 import com.ryan.chatlib.BaseChatViewHolder;
+import com.ryan.simplechatview.MyChatMsg;
+import com.ryan.simplechatview.R;
 
+/**
+ * @author RyanLee
+ */
 public class ActivityNewsHolder extends BaseChatViewHolder {
 
     public ActivityNewsHolder(View itemView) {
