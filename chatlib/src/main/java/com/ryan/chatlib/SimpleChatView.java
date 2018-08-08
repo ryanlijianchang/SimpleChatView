@@ -63,4 +63,10 @@ public class SimpleChatView<D extends BaseChatMsg, T extends BaseChatAdapter> ex
             mSimpleChatManager.ready();
         }
     }
+
+    public void release() {
+        if (mSimpleChatManager != null) {
+            mSimpleChatManager.release();
+        }
+    }
 }
