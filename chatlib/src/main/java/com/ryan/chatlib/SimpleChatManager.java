@@ -57,8 +57,8 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
         this.mChatView = mRecyclerView;
     }
 
-    private void initBufferChat(int bufferTime) {
-        iBufferChat = new BufferChat<>(this, bufferTime);
+    private void initBufferChat() {
+        iBufferChat = new BufferChat<>(this, mBufferTime);
         iBufferChat.play();
     }
 
@@ -280,10 +280,13 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     public void ready() {
         initChatView();
         addScrollListener();
-        initBufferChat(mBufferTime);
+        initBufferChat();
     }
 
     public void setBufferTime(int bufferTime) {
+        if (bufferTime < 0) {
+            bufferTime = DEFAULT_BUFFER_TIME;
+        }
         this.mBufferTime = bufferTime;
     }
 }
