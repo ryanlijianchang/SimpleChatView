@@ -20,12 +20,13 @@ public class BufferChat<D extends BaseChatMsg> implements IBufferChat<D> {
 
     private List<D> mBufferLists;
 
-    private static final int REPEAT_TIME = 400;
+    private int mUpdateTime;
 
     private static final Object LOCK = new Object();
 
-    BufferChat(ISimpleChat chatManager) {
+    BufferChat(ISimpleChat chatManager, int bufferTime) {
         this.iSimpleChat = chatManager;
+        this.mUpdateTime = bufferTime;
         mBufferLists = new ArrayList<>();
     }
 
@@ -71,7 +72,7 @@ public class BufferChat<D extends BaseChatMsg> implements IBufferChat<D> {
 
         if (ListUtils.isEmpty(mBufferLists)) {
             mUIHandler.removeCallbacks(this);
-            mUIHandler.postDelayed(this, REPEAT_TIME);
+            mUIHandler.postDelayed(this, mUpdateTime);
             return;
         }
 
@@ -80,6 +81,7 @@ public class BufferChat<D extends BaseChatMsg> implements IBufferChat<D> {
             mBufferLists.clear();
         }
         mUIHandler.removeCallbacks(this);
-        mUIHandler.postDelayed(this, REPEAT_TIME);
+        mUIHandler.postDelayed(this, mUpdateTime);
     }
+
 }

@@ -34,7 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mChatView = findViewById(R.id.chat);
 
         SimpleChatAdapter adapter = new SimpleChatAdapter(null);
-        mChatView.setAdapter(adapter).setUp();
+        mChatView
+                // 设置Adapter
+                .setAdapter(adapter)
+                // 设置缓冲时间50ms
+                .setBufferTime(50)
+                // 最后调用setUp
+                .setUp();
 
 
     }

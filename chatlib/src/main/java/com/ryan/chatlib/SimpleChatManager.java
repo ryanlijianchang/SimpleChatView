@@ -31,10 +31,12 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     private static final int DEFAULT_ITEM_SPACE = DensityUtils.dp2px(AppUtils.getContext(), 3);
     private static final int DEFAULT_SCROLL_ITEM_NUM = 10;
     private static final int DEFAULT_MAX_CHAT_NUM = 100;
+    private static final int DEFAULT_BUFFER_TIME = 400;
 
     private RecyclerView mChatView;
     private BaseChatAdapter mAdapter;
     private LinearLayoutManager mLinearManager;
+    private int mBufferTime = DEFAULT_BUFFER_TIME;
 
     /**
      * Item间隔
@@ -50,12 +52,13 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     private IBufferChat<D> iBufferChat;
 
 
+
     SimpleChatManager(@NonNull RecyclerView mRecyclerView) {
         this.mChatView = mRecyclerView;
     }
 
-    private void initBufferChat() {
-        iBufferChat = new BufferChat<>(this);
+    private void initBufferChat(int bufferTime) {
+        iBufferChat = new BufferChat<>(this, bufferTime);
         iBufferChat.play();
     }
 
@@ -277,7 +280,10 @@ public class SimpleChatManager<D extends BaseChatMsg> implements ISimpleChat<D> 
     public void ready() {
         initChatView();
         addScrollListener();
-        initBufferChat();
+        initBufferChat(mBufferTime);
     }
 
+    public void setBufferTime(int bufferTime) {
+        this.mBufferTime = bufferTime;
+    }
 }

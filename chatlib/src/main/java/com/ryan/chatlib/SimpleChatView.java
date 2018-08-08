@@ -1,6 +1,7 @@
 package com.ryan.chatlib;
 
 import android.content.Context;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -48,6 +49,13 @@ public class SimpleChatView<D extends BaseChatMsg, T extends BaseChatAdapter> ex
         if (mSimpleChatManager != null) {
             mSimpleChatManager.sendMultiMsg(datas);
         }
+    }
+
+    public SimpleChatView setBufferTime(@IntRange(from = 0) int bufferTime) {
+        if (mSimpleChatManager != null) {
+            mSimpleChatManager.setBufferTime(bufferTime);
+        }
+        return this;
     }
 
     public void setUp() {
