@@ -124,7 +124,7 @@ https://github.com/ryanlijianchang/SimpleChatView)
 
 # 版本特性 #
 
-查看更多，请转移至[Releases](https://github.com/ryanlijianchang/Recyclerview-Gallery/releases)。
+查看更多，请转移至[Releases](https://github.com/ryanlijianchang/SimpleChatView/releases)。
 
 
 # License #
