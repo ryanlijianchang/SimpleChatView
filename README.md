@@ -1,6 +1,6 @@
 # README #
 
-[![Download](https://img.shields.io/badge/Download-V0.0.4-blue.svg)](https://bintray.com/ryanlijianchang/maven/SimpleChatView)
+[![Download](https://img.shields.io/badge/Download-V0.0.5-blue.svg)](https://bintray.com/ryanlijianchang/maven/SimpleChatView)
 [![License](https://img.shields.io/badge/license-Apache2.0-green.svg)](
 https://github.com/ryanlijianchang/SimpleChatView)
 [![Build](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](
@@ -8,6 +8,7 @@ https://github.com/ryanlijianchang/SimpleChatView)
 
 使用SimpleChatView实现公屏效果。实现效果如下：
 
+![image](http://osjnd854m.bkt.clouddn.com/ssss.gif)
 
 # 用法 #
 
@@ -15,7 +16,7 @@ https://github.com/ryanlijianchang/SimpleChatView)
 
 在你的`build.gradle`中添加依赖。
 
-    implementation 'com.ryan.chatlib:chatlib:0.0.4'
+    implementation 'com.ryan.chatlib:chatlib:0.0.5'
 
 ### Step 2 ###
 
@@ -42,7 +43,48 @@ https://github.com/ryanlijianchang/SimpleChatView)
 
 ### Step 3 ###
 
-在Activity创建完成之后，通过findView找到SimpleChatView，然后创建Adapter（需要继承BaseChatAdapter，同时需要传入你的数据类型），最后调用提供接口即可。
+定义你的数据接口，需要继承`BaseChatMsg`，如创建`MyChatMsg`:
+
+	public class MyChatMsg extends BaseChatMsg {
+		public int type;
+		public String content;
+	}
+
+### Step 4 ###
+
+创建适配器，需要继承`BaseChatAdapter`，并把数据接口传入，因为`BaseChatAdapter`使用的是继承于`BaseChatMsg`的泛型，所以需要把你定义的数据接口传入，如创建`SimpleChatAdapter`：
+
+	public class SimpleChatAdapter extends BaseChatAdapter<MyChatMsg> {
+		
+		// 实现RecyclerView.Adapter必须实现的接口
+		...
+	
+		// 还需要实现这三个接口
+		@Override
+	    public synchronized void removeItems(int startPos, int endPos) {
+	        mDatas.subList(startPos, endPos).clear();
+	        notifyItemRangeRemoved(1, (endPos - startPos));
+	    }
+	
+	
+	    @Override
+	    public synchronized void addItem(MyChatMsg chatMsg) {
+	        mDatas.add(chatMsg);
+	        notifyItemInserted(getItemCount());
+	    }
+	
+	    @Override
+	    public synchronized void addItemList(List<MyChatMsg> list) {
+	        int startPos = getItemCount();
+	        int addSize = ListUtils.isEmpty(list) ? 0 : list.size();
+	        mDatas.addAll(list);
+	        notifyItemRangeInserted(startPos, addSize);
+	    }
+	}
+
+### Step 5 ###
+
+在Activity创建完成之后，通过id绑定SimpleChatView，然后创建适配器，最后调用提供接口即可。
 
     mChatView = findViewById(R.id.chat);
 
@@ -73,89 +115,22 @@ https://github.com/ryanlijianchang/SimpleChatView)
 2. `sendSingleMsg(D msg)`：发送单条消息
 3. `sendMultiMsg(List<D> datas)`：发送多条消息
 4. `setBufferTime(@IntRange(from = 0) int bufferTime)`：设置缓冲时间，单位ms
-5. `initPageParams(int pageMargin, int leftPageVisibleWidth)`：动态配置页边距和左右页可视宽度/高度
-6. `getScrolledPosition()`：获取当前位置
-7. `getLinearLayoutManager()`：获取LayoutManager
-8. `getOrientation()`：获取当前的滑动方向 HORIZONTAL:0 VERTICAL:1
-9. `autoPlay(boolean)`：是否自动播放
-10. `intervalTime(int interval)`：自动播放间隔时间，单位ms
-11. `initPosition(int position)`：开始处于的位置
+5. `setUp()`：装载，必须最后调用
+6. `release()`：释放资源
 
 # 实现 #
 
-具体实现过程已在掘金上发布了，如果你感兴趣，可以跳转到[这里](https://juejin.im/post/5a30fe5a6fb9a045132ab1bf)。如果你觉得可以帮助到你，不妨点个Star。
+具体实现过程已在掘金上发布了，如果你感兴趣，可以跳转到[这里](https://juejin.im/post/5b63345051882519ba007802#comment)。如果你觉得可以帮助到你，不妨点个Star。
 
 # 版本特性 #
 
 查看更多，请转移至[Releases](https://github.com/ryanlijianchang/Recyclerview-Gallery/releases)。
 
-**V1.1.2**
-1. BUG FIX。Fix By @[tingshuonitiao](https://github.com/tingshuonitiao)修复第一次进入时第0张图片leftPageVisibleWidth不展示的bug
-
-**V1.1.1**
-
-1. BUG FIX。修复第一次初始化时设置默认位置不对的问题。提供接口initPosition(int pos)设置初始位置，初始后可以直接调用smoothScrollToPosition(int pos)移动到需要的位置。
-2. 更换设置ScrollListener时机。
-
-**V1.1.0**
-
-1. BUG FIX。修复在Fragment上使用出现的异常问题。
-2. 增加自动播放接口。
-
-**V1.0.9**
-
-1. BUG FIX。修复滑动动画不顺畅问题。
-
-**V1.0.8**
-
-1. BUG FIX。修复从其他图片切换到第一张图片时抖动的问题。
-
-**V1.0.7**
-
-1. BUG FIX。修复横竖屏切换时UI异常问题。
-
-**V1.0.6**
-
-1. BUG FIX By @[jefshi](https://github.com/jefshi)。去除单例，修复前后台切换后，位置不对的问题。
-2. BUG FIX By @[jefshi](https://github.com/jefshi)。修复接受到微信、QQ等消息通知后，图片高度不对问题。
-3. Gradle升级V4.4。
-
-**V1.0.5**
-
-1. BUG FIX。修复了GalleryRecyclerView从前台切换到后台时闪退，位置错乱等问题。
-
-**V1.0.4**
-
-1. 增加helper属性，包括LinearySnapHelper和PagerSnapHelper。
-
-**V1.0.3**
-
-1. 修复了移动一页理论消耗距离应该是图片宽度加上2倍页边距。
-2. 修复了修改页边距和可视宽度之后，没有生效。
-
-**V1.0.2**
-
-1. BUG FIX。修复LayoutManager使用非LinearyLayoutManager时不抛出异常。 
-
-**V1.0.1**
-
-1. BUG FIX。首次打开，获得焦点后滑动至第0项，避免第0项的margin不对。
-
-**V1.0.0**
-
-1. GalleryRecyclerview支持实现Gallery效果。
-2. 支持动态修改滑动速度（像素/s）。
-3. 支持动态修改切换动画的参数因子。
-4. 支持配置动画类型。
-5. 支持点击事件。
-6. 支持动态配置页边距和左右页可视宽度/高度。
-
-
 
 # License #
 
     
-    Copyright 2017 ryanlijianchang
+    Copyright 2018 ryanlijianchang
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
