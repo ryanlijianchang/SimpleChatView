@@ -8,7 +8,7 @@ https://github.com/ryanlijianchang/SimpleChatView)
 
 使用SimpleChatView实现公屏效果。实现效果如下：
 
-![image](http://osjnd854m.bkt.clouddn.com/ssss.gif)
+![image](https://user-gold-cdn.xitu.io/2018/8/3/164fb844f5af8369?imageslim)
 
 # 用法 #
 
